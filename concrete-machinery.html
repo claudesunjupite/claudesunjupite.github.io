@@ -353,7 +353,7 @@ if (!window.spaRouterLoaded) {
 <div class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight text-sm uppercase">
 <a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="index.html">Home</a>
 <a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="about.html">About Us</a>
-<a class="text-yellow-600 border-b-2 border-yellow-600 pb-1 transition-all duration-300" href="product.html">Product</a>
+<a class="text-yellow-700 border-b-2 border-yellow-700 pb-1 transition-all duration-300" href="product.html">Product</a>
 <a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="site-reference.html">Site Reference</a>
 <a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="contact.html">Contact Us</a>
 </div>
@@ -825,9 +825,9 @@ English
 <p class="font-['Work_Sans'] text-xs tracking-wider text-neutral-400 mt-2 max-w-xs">Providing reliable heavy lifting products and services with expert technical precision.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-12 md:gap-16 mb-8 md:mb-0 font-['Work_Sans'] text-xs tracking-wider text-neutral-400">
-<a class="text-neutral-500 hover:text-white transition-colors hover:underline decoration-yellow-500" href="#">Privacy Policy</a>
-<a class="text-neutral-500 hover:text-white transition-colors hover:underline decoration-yellow-500" href="#">Terms of Service</a>
-<a class="text-neutral-500 hover:text-white transition-colors hover:underline decoration-yellow-500" href="#">Safety Manuals</a>
+<a class="text-neutral-400 hover:text-white transition-colors hover:underline decoration-yellow-500" href="#">Privacy Policy</a>
+<a class="text-neutral-400 hover:text-white transition-colors hover:underline decoration-yellow-500" href="#">Terms of Service</a>
+<a class="text-neutral-400 hover:text-white transition-colors hover:underline decoration-yellow-500" href="#">Safety Manuals</a>
 </div>
 <div class="text-center md:text-right opacity-80 hover:opacity-100 transition-all duration-300">
 <p class="font-['Work_Sans'] text-xs tracking-wider text-neutral-400">© 2024 SUN JUPITER CO.,LTD. All Rights Reserved.</p>
@@ -1034,6 +1034,7 @@ setTimeout(() => {
         
         modal.classList.remove('pointer-events-none', 'opacity-0');
         modal.classList.add('opacity-100');
+        modal.style.opacity = '1';
         
         setTimeout(() => {
             content.classList.remove('translate-y-8');
