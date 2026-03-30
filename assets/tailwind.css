@@ -256,7 +256,6 @@ img, video { max-width: 100%; height: auto; }
 .border-white\/5 { border-color: rgb(255 255 255 / 0.05); }
 .border-y { border-top-width: 1px; border-bottom-width: 1px; }
 .border-yellow-600 { border-color: #ca8a04; }
-.border-yellow-700 { border-color: #a16207; }
 .bottom-0 { bottom: 0px; }
 .bottom-12 { bottom: 3rem; }
 .bottom-4 { bottom: 1rem; }
@@ -564,6 +563,7 @@ img, video { max-width: 100%; height: auto; }
 .text-left { text-align: left; }
 .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
 .text-neutral-400 { color: #a3a3a3; }
+.text-neutral-500 { color: #737373; }
 .text-neutral-600 { color: #525252; }
 .text-neutral-700 { color: #404040; }
 .text-on-primary { color: #ffffff; }
