@@ -165,6 +165,14 @@ if (!window.spaRouterLoaded) {
                         if (cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
                     });
                 }, 50);
+                // Re-initialize tab UI after SPA swap (ensures brand tabs work without reload)
+                setTimeout(() => {
+                    const firstTabCard = document.querySelector('.tab-card');
+                    if (firstTabCard && typeof switchTab === 'function') {
+                        const tabId = firstTabCard.id.replace('tab-', '');
+                        switchTab(tabId, false);
+                    }
+                }, 200);
                 
                 if (url.includes('#')) {
                     const hash = url.split('#')[1];

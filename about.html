@@ -165,6 +165,14 @@ if (!window.spaRouterLoaded) {
                         if (cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
                     });
                 }, 50);
+                // Re-initialize tab UI after SPA swap (ensures brand tabs work without reload)
+                setTimeout(() => {
+                    const firstTabCard = document.querySelector('.tab-card');
+                    if (firstTabCard && typeof switchTab === 'function') {
+                        const tabId = firstTabCard.id.replace('tab-', '');
+                        switchTab(tabId, false);
+                    }
+                }, 200);
                 
                 if (url.includes('#')) {
                     const hash = url.split('#')[1];
@@ -221,15 +229,15 @@ if (!window.spaRouterLoaded) {
 <body class="bg-surface text-on-surface antialiased">
 <!-- STANDARDIZED NAVBAR -->
 <nav class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md shadow-sm border-b border-neutral-200/50 flex justify-between items-center px-8 py-4 w-full max-w-none transition-all duration-300">
-<div class="flex items-center cursor-pointer transition-transform hover:scale-105" onclick="window.navigateToSPA ? window.navigateToSPA('/') : window.location.href='/'">
+<div class="flex items-center cursor-pointer transition-transform hover:scale-105" onclick="window.navigateToSPA ? window.navigateToSPA('index.html') : window.location.href='index.html'">
 <img loading="eager" alt="SUN JUPITER CO.,LTD. Logo" class="h-14 md:h-16 w-auto object-contain" src="assets/sunjupiter-logo.png"/>
 </div>
 <div class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight text-sm uppercase">
-<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="/">Home</a>
-<a class="text-yellow-600 border-b-2 border-yellow-600 pb-1 transition-all duration-300" href="/about">About Us</a>
-<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="/product">Product</a>
-<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="/site-reference">Site Reference</a>
-<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="/contact">Contact Us</a>
+<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="index.html">Home</a>
+<a class="text-yellow-600 border-b-2 border-yellow-600 pb-1 transition-all duration-300" href="about.html">About Us</a>
+<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="product.html">Product</a>
+<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="site-reference.html">Site Reference</a>
+<a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="contact.html">Contact Us</a>
 </div>
 <div class="flex items-center gap-6">
 <div class="relative group">
