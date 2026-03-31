@@ -270,6 +270,19 @@ if (!window.spaRouterLoaded) {
                 
                 document.title = doc.title;
                 
+                // Inject/replace out-of-main body elements from fetched doc (modals, overlays, etc.)
+                // These are outside <main> so replaceWith(newMain) doesn't move them automatically
+                Array.from(doc.body.children).forEach(el => {
+                    const tag = el.tagName.toLowerCase();
+                    if (tag === 'script' || tag === 'main' || tag === 'nav' || tag === 'noscript') return;
+                    const existingEl = el.id ? document.getElementById(el.id) : null;
+                    if (existingEl) {
+                        existingEl.replaceWith(el);
+                    } else {
+                        document.body.appendChild(el);
+                    }
+                });
+
                 // Re-execute scripts (using pre-extracted text to avoid missing in-main scripts)
                 scriptTexts.forEach(text => {
                     const newScript = document.createElement('script');
