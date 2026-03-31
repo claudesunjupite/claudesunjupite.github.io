@@ -909,3 +909,5 @@ img, video { max-width: 100%; height: auto; }
 .overflow-x-auto { overflow-x: auto; }
 .overflow-y-auto { overflow-y: auto; }
 .overflow-y-hidden { overflow-y: hidden; }
+.icon-drop-shadow { filter: drop-shadow(0 0 4px rgba(0,0,0,0.15)); }
+.material-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
