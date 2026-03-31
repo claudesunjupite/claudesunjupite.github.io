@@ -3,19 +3,18 @@
 <html class="light" lang="en"><head>
   <title>Sun Jupiter Co., Ltd. | Construction Hoists, Tower Cranes & Concrete Machinery</title>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://lh3.googleusercontent.com"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
 <link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
-    /* ── SPA View Transition: smooth cross-fade ────────────────── */
-    ::view-transition-old(root) {
-        animation: sj-fade-out 120ms ease-out forwards;
-    }
-    ::view-transition-new(root) {
-        animation: sj-fade-in 160ms ease-in forwards;
-    }
+    /* ── SPA View Transition ─────────────────────────────────────── */
+    ::view-transition-old(root) { animation: sj-fade-out 120ms ease-out forwards; }
+    ::view-transition-new(root) { animation: sj-fade-in 160ms ease-in forwards; }
     @keyframes sj-fade-out {
         from { opacity: 1; transform: translateY(0); }
         to   { opacity: 0; transform: translateY(-6px); }
@@ -24,27 +23,21 @@
         from { opacity: 0; transform: translateY(8px); }
         to   { opacity: 1; transform: translateY(0); }
     }
-
-  @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-60px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  .slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) both; }
-  .delay-100 { animation-delay: 0.1s; }
-  .delay-200 { animation-delay: 0.2s; }
-  .delay-350 { animation-delay: 0.35s; }
-  .delay-500 { animation-delay: 0.5s; }
+    /* ── Hero animation ──────────────────────────────────────────── */
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-60px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+    .slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) both; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-350 { animation-delay: 0.35s; }
+    .delay-500 { animation-delay: 0.5s; }
+    /* ── Typography & icons ──────────────────────────────────────── */
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { font-family: 'Roboto', sans-serif; }
+    h1, h2, h3, h4 { font-family: 'Inter', sans-serif; }
 </style>
-
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body { 
-            font-family: 'Roboto', sans-serif; 
-        }
-        h1, h2, h3, h4 { font-family: 'Inter', sans-serif; }
-    </style>
 
 <script id="spa-router">
 if (!window.spaRouterLoaded) {
@@ -188,11 +181,12 @@ if (!window.spaRouterLoaded) {
   <link rel="canonical" href="https://claudesunjupite.github.io/"/>
 </head>
 <body class="bg-surface text-on-surface antialiased">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-yellow-600 focus:text-white focus:px-4 focus:py-2 focus:font-bold focus:rounded">Skip to main content</a>
 <!-- TopNavBar (Updated with components_16 and image_6) -->
-<nav class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md shadow-sm border-b border-neutral-200/50 flex justify-between items-center px-8 py-4 w-full max-w-none transition-all duration-300">
-<div class="flex items-center cursor-pointer transition-transform hover:scale-105" onclick="window.navigateToSPA ? window.navigateToSPA('index.html') : window.location.href='index.html'">
+<nav aria-label="Main navigation" class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md shadow-sm border-b border-neutral-200/50 flex justify-between items-center px-8 py-4 w-full max-w-none transition-all duration-300">
+<a href="index.html" class="flex items-center transition-transform hover:scale-105" onclick="if(window.navigateToSPA){event.preventDefault();window.navigateToSPA('index.html')}" aria-label="SUN JUPITER CO.,LTD. — Go to homepage">
 <img loading="eager" alt="SUN JUPITER CO.,LTD. Logo" class="h-14 md:h-16 w-auto object-contain" src="assets/sunjupiter-logo.webp"/>
-</div>
+</a>
 <div class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight text-sm uppercase">
 <a class="text-yellow-600 border-b-2 border-yellow-600 pb-1 transition-all duration-300" href="index.html">Home</a>
 <a class="text-neutral-700 hover:text-yellow-600 transition-colors transition-all duration-300" href="about.html">About Us</a>
@@ -202,10 +196,10 @@ if (!window.spaRouterLoaded) {
 </div>
 <div class="flex items-center gap-6">
 <div class="relative group">
-<button class="flex items-center gap-1 text-xs font-bold text-neutral-600 hover:text-yellow-600 uppercase tracking-widest transition-colors py-2">
-<span class="material-symbols-outlined text-[18px]">language</span>
+<button class="flex items-center gap-1 text-xs font-bold text-neutral-600 hover:text-yellow-600 uppercase tracking-widest transition-colors py-2" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+<span class="material-symbols-outlined text-[18px]" aria-hidden="true">language</span>
 EN
-<span class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180" aria-hidden="true">expand_more</span>
 </button>
 <div class="absolute right-0 top-full w-32 bg-white border border-neutral-100 shadow-xl rounded-md overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
 <a href="#" class="block px-4 py-3 text-xs text-neutral-700 hover:bg-neutral-50 hover:text-yellow-600 font-bold tracking-wider" data-lang="en" onclick="event.preventDefault();window.setLanguage('en')">
@@ -220,11 +214,11 @@ English
 <img src="assets/credo.webp" alt="CREDO" class="hidden lg:block h-8 w-auto object-contain icon-drop-shadow">
 </div>
 </nav>
-<main class="pt-32">
+<main id="main-content" class="pt-32">
 <!-- Hero Section: Updated text -->
 <section class="relative min-h-[921px] flex items-center overflow-hidden">
 <div class="absolute inset-0 z-0">
-<img loading="lazy" alt="massive industrial crawler crane at dawn with dramatic lighting" class="w-full h-full object-cover grayscale brightness-50" data-alt="massive industrial crawler crane at dawn with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDarcEmwKQer_-tkD1HxI5SL_WYkfJBTimi-XC44_v1B-Sdf-son6MyRUo2lN8ZitdHD8WDRNV2OrRMucjt69wvH6U8tBMjjObtwjtBWgOp3pVrPJVpDj4USrpw3-cqo_lOjCRi5OQrb06y8XpuOHsKoCuZ6X3Wi2ve5xIhW8BP8I1xBYeRq78G18lOIanCs_mQUR7MHYEwcgsxxjQP1ygoXc5Wbn_Jx5x6Ckwo_2al4FrjZTbS8flvdhC6aARhqbYm-Y6snSAP4Qkv"/>
+<img loading="eager" fetchpriority="high" alt="massive industrial crawler crane at dawn with dramatic lighting" class="w-full h-full object-cover grayscale brightness-50" data-alt="massive industrial crawler crane at dawn with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDarcEmwKQer_-tkD1HxI5SL_WYkfJBTimi-XC44_v1B-Sdf-son6MyRUo2lN8ZitdHD8WDRNV2OrRMucjt69wvH6U8tBMjjObtwjtBWgOp3pVrPJVpDj4USrpw3-cqo_lOjCRi5OQrb06y8XpuOHsKoCuZ6X3Wi2ve5xIhW8BP8I1xBYeRq78G18lOIanCs_mQUR7MHYEwcgsxxjQP1ygoXc5Wbn_Jx5x6Ckwo_2al4FrjZTbS8flvdhC6aARhqbYm-Y6snSAP4Qkv"/>
 <div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-900/60 to-transparent"></div>
 </div>
 <div class="container mx-auto px-8 relative z-10 grid grid-cols-12 gap-12 md:gap-16 items-center">
