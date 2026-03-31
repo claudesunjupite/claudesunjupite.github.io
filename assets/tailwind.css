@@ -913,6 +913,9 @@ img, video { max-width: 100%; height: auto; }
 .material-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
 /* ── SPA View Transitions ───────────────────────────────────────── */
+nav { view-transition-name: site-nav; }
+::view-transition-old(site-nav),
+::view-transition-new(site-nav) { animation: none; }
 ::view-transition-old(root) { animation: sj-slide-out 300ms cubic-bezier(0.4,0,0.2,1) forwards; }
 ::view-transition-new(root) { animation: sj-slide-in  300ms cubic-bezier(0.4,0,0.2,1) forwards; }
 @keyframes sj-slide-out {
@@ -958,9 +961,9 @@ img, video { max-width: 100%; height: auto; }
 
 /* ── Mask reveal (hero title text) ──────────────────────────────── */
 .mask-wrapper { overflow: hidden; display: inline-block; vertical-align: bottom; }
-.anim2-subtitle { animation: maskReveal 0.8s cubic-bezier(0.77,0,0.175,1) forwards;       transform: translateY(110%); }
-.anim2-title    { animation: maskReveal 0.8s cubic-bezier(0.77,0,0.175,1) 0.15s forwards; transform: translateY(110%); }
-.anim2-desc     { animation: maskReveal 0.8s cubic-bezier(0.77,0,0.175,1) 0.3s forwards;  transform: translateY(110%); opacity: 0; }
+.anim2-subtitle { animation: maskReveal 0.45s cubic-bezier(0.77,0,0.175,1) forwards;        transform: translateY(110%); }
+.anim2-title    { animation: maskReveal 0.45s cubic-bezier(0.77,0,0.175,1) 0.08s forwards; transform: translateY(110%); }
+.anim2-desc     { animation: maskReveal 0.45s cubic-bezier(0.77,0,0.175,1) 0.15s forwards; transform: translateY(110%); opacity: 0; }
 @keyframes maskReveal {
     0%   { transform: translateY(110%); opacity: 0; }
     100% { transform: translateY(0);    opacity: 1; }
@@ -969,9 +972,9 @@ img, video { max-width: 100%; height: auto; }
     0%   { transform: translateY(0);     opacity: 1; }
     100% { transform: translateY(-110%); opacity: 0; }
 }
-.anim-out .anim2-subtitle { animation: maskHide 0.5s cubic-bezier(0.77,0,0.175,1) forwards; }
-.anim-out .anim2-title    { animation: maskHide 0.5s cubic-bezier(0.77,0,0.175,1) 0.05s forwards; }
-.anim-out .anim2-desc     { animation: maskHide 0.5s cubic-bezier(0.77,0,0.175,1) 0.1s forwards; }
+.anim-out .anim2-subtitle { animation: maskHide 0.28s cubic-bezier(0.77,0,0.175,1) forwards; }
+.anim-out .anim2-title    { animation: maskHide 0.28s cubic-bezier(0.77,0,0.175,1) 0.03s forwards; }
+.anim-out .anim2-desc     { animation: maskHide 0.28s cubic-bezier(0.77,0,0.175,1) 0.05s forwards; }
 
 /* ── Respect reduced-motion preference ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

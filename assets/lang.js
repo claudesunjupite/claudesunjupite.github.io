@@ -30,6 +30,7 @@
     'Privacy Policy':   'นโยบายความเป็นส่วนตัว',
     'Terms of Service': 'เงื่อนไขการให้บริการ',
     'Safety Manuals':   'คู่มือความปลอดภัย',
+    'SUN JUPITER CO.,LTD.': 'บริษัท ซันจูปิเตอร์ จำกัด',
     '© 2024 SUN JUPITER CO.,LTD. All Rights Reserved.':
       '© 2567 บริษัท ซัน จูปิเตอร์ จำกัด สงวนลิขสิทธิ์',
 
@@ -304,7 +305,11 @@
 
   /** Normalize whitespace for dictionary lookup */
   function norm(str) {
-    return str.replace(/\s+/g, ' ').trim();
+    return str
+      .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'") // curly single quotes → '
+      .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"') // curly double quotes → "
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
   /**
@@ -382,6 +387,10 @@
       'h1, h2, h3, h4, h5, h6, p, span, a, button, li, td, th, label, div, small, strong, em, b, i'
     );
 
+    // Build a normalized DICT (normalize keys once so curly quotes in source match straight quotes from HTML)
+    const normDict = {};
+    for (const [k, v] of Object.entries(DICT)) { normDict[norm(k)] = v; }
+
     const translated = new Set();
 
     for (const el of candidates) {
@@ -408,7 +417,7 @@
       const text = getMatchText(el);
       if (!text) continue;
 
-      const thTxt = DICT[text];
+      const thTxt = normDict[text];
       if (thTxt) {
         translateEl(el, thTxt);
         translated.add(el);
