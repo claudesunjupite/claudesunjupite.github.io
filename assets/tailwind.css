@@ -911,3 +911,71 @@ img, video { max-width: 100%; height: auto; }
 .overflow-y-hidden { overflow-y: hidden; }
 .icon-drop-shadow { filter: drop-shadow(0 0 4px rgba(0,0,0,0.15)); }
 .material-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* ── SPA View Transitions ───────────────────────────────────────── */
+::view-transition-old(root) { animation: sj-slide-out 300ms cubic-bezier(0.4,0,0.2,1) forwards; }
+::view-transition-new(root) { animation: sj-slide-in  300ms cubic-bezier(0.4,0,0.2,1) forwards; }
+@keyframes sj-slide-out {
+    from { opacity: 1; transform: translateX(0);     }
+    to   { opacity: 0; transform: translateX(-40px); }
+}
+@keyframes sj-slide-in {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* ── Entry animations ───────────────────────────────────────────── */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to   { opacity: 1; transform: translateX(0);     }
+}
+.slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) both; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-350 { animation-delay: 0.35s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ── Product page hero & content animations ─────────────────────── */
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
+
+@keyframes content-fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes content-fade-out-down {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(10px); }
+}
+.has-hero > *:not(#hero-slider), .has-hero + footer {
+    animation: content-fade-in-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+    opacity: 0;
+}
+.has-hero > *:not(#hero-slider).fade-out { animation: content-fade-out-down 0.4s ease-in forwards; }
+
+/* ── Mask reveal (hero title text) ──────────────────────────────── */
+.mask-wrapper { overflow: hidden; display: inline-block; vertical-align: bottom; }
+.anim2-subtitle { animation: maskReveal 0.8s cubic-bezier(0.77,0,0.175,1) forwards;       transform: translateY(110%); }
+.anim2-title    { animation: maskReveal 0.8s cubic-bezier(0.77,0,0.175,1) 0.15s forwards; transform: translateY(110%); }
+.anim2-desc     { animation: maskReveal 0.8s cubic-bezier(0.77,0,0.175,1) 0.3s forwards;  transform: translateY(110%); opacity: 0; }
+@keyframes maskReveal {
+    0%   { transform: translateY(110%); opacity: 0; }
+    100% { transform: translateY(0);    opacity: 1; }
+}
+@keyframes maskHide {
+    0%   { transform: translateY(0);     opacity: 1; }
+    100% { transform: translateY(-110%); opacity: 0; }
+}
+.anim-out .anim2-subtitle { animation: maskHide 0.5s cubic-bezier(0.77,0,0.175,1) forwards; }
+.anim-out .anim2-title    { animation: maskHide 0.5s cubic-bezier(0.77,0,0.175,1) 0.05s forwards; }
+.anim-out .anim2-desc     { animation: maskHide 0.5s cubic-bezier(0.77,0,0.175,1) 0.1s forwards; }
+
+/* ── Respect reduced-motion preference ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation: none; }
+    .slide-in-left { animation: none; }
+}

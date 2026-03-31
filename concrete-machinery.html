@@ -57,59 +57,7 @@
         }
     </style>
 <style>
-@keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-up {
-    animation: fade-in-up 0.4s ease-out forwards;
-}
-</style>
-
-
-<style>
 html { background-color: #faf8f5; overflow-y: scroll; overflow-x: hidden; }
-body { 
-    transition: opacity 0.25s ease-in-out; 
-}
-
-#hero-slider { opacity: 1; }
-
-main > *:not(#hero-slider), footer {
-    animation: content-fade-in-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-    opacity: 0;
-}
-main > *:not(#hero-slider).fade-out, footer.fade-out {
-    animation: content-fade-out-down 0.4s ease-in forwards;
-}
-
-@keyframes content-fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes content-fade-out-down {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(10px); }
-}
-</style>
-<style>
-/* Option 2: Mask Reveal */
-.mask-wrapper { overflow: hidden; display: inline-block; vertical-align: bottom; }
-.anim2-subtitle { animation: maskReveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards; transform: translateY(110%); }
-.anim2-title { animation: maskReveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.15s forwards; transform: translateY(110%); }
-.anim2-desc { animation: maskReveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.3s forwards; transform: translateY(110%); opacity: 0; }
-@keyframes maskReveal {
-    0% { transform: translateY(110%); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-}
-/* Mask Hide (Symmetrical Exit) */
-@keyframes maskHide {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-110%); opacity: 0; }
-}
-.anim-out .anim2-subtitle { animation: maskHide 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
-.anim-out .anim2-title { animation: maskHide 0.5s cubic-bezier(0.77, 0, 0.175, 1) 0.05s forwards; }
-.anim-out .anim2-desc { animation: maskHide 0.5s cubic-bezier(0.77, 0, 0.175, 1) 0.1s forwards; }
 </style>
 <script id="spa-router">
 if (!window.spaRouterLoaded) {
@@ -159,14 +107,20 @@ if (!window.spaRouterLoaded) {
                 if (currentNav && newNav) {
                     currentNav.innerHTML = newNav.innerHTML;
                 }
-                
+
+                const currentFooter = document.querySelector('footer');
+                const newFooter = doc.querySelector('footer');
+                if (currentFooter && newFooter) {
+                    currentFooter.replaceWith(newFooter);
+                }
+
                 document.title = doc.title;
-                
+
                 // Inject/replace out-of-main body elements from fetched doc (modals, overlays, etc.)
                 // These are outside <main> so replaceWith(newMain) doesn't move them automatically
                 Array.from(doc.body.children).forEach(el => {
                     const tag = el.tagName.toLowerCase();
-                    if (tag === 'script' || tag === 'main' || tag === 'nav' || tag === 'noscript') return;
+                    if (tag === 'script' || tag === 'main' || tag === 'nav' || tag === 'footer' || tag === 'noscript') return;
                     const existingEl = el.id ? document.getElementById(el.id) : null;
                     if (existingEl) {
                         existingEl.replaceWith(el);
@@ -189,6 +143,11 @@ if (!window.spaRouterLoaded) {
                     document.querySelectorAll('[class*="animate-"]').forEach(el => {
                         const cls = [...el.classList].find(c => c.startsWith('animate-'));
                         if (cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+                    });
+                    document.querySelectorAll('.slide-in-left').forEach(el => {
+                        el.style.animation = 'none';
+                        void el.offsetHeight;
+                        el.style.animation = '';
                     });
                 }, 50);
                 // Re-initialize tab UI after SPA swap (ensures brand tabs work without reload)
@@ -221,8 +180,12 @@ if (!window.spaRouterLoaded) {
             }
 
             window.history.pushState({}, '', url);
-            performSwap();
-            
+            if (document.startViewTransition) {
+                document.startViewTransition(() => performSwap());
+            } else {
+                performSwap();
+            }
+
         } catch (e) {
             window.location.href = url; 
         }
@@ -315,7 +278,7 @@ English
 <img loading="eager" src="assets/credo.webp" alt="CREDO" class="hidden lg:block h-8 w-auto object-contain icon-drop-shadow">
 </div>
 </nav>
-<main id="main-content" class="pt-24">
+<main id="main-content" class="pt-24 has-hero">
 <!-- Hero Section -->
 <section id="hero-slider" class="relative h-[600px] overflow-hidden flex items-center bg-surface-container-highest">
 <div id="hero-track" class="absolute inset-y-0 left-0 w-[300%] h-full z-0 flex transform -translate-x-[33.333333%] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] will-change-transform">

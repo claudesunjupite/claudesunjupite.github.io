@@ -12,27 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
 <link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
-    /* ── SPA View Transition ─────────────────────────────────────── */
-    ::view-transition-old(root) { animation: sj-fade-out 120ms ease-out forwards; }
-    ::view-transition-new(root) { animation: sj-fade-in 160ms ease-in forwards; }
-    @keyframes sj-fade-out {
-        from { opacity: 1; transform: translateY(0); }
-        to   { opacity: 0; transform: translateY(-6px); }
-    }
-    @keyframes sj-fade-in {
-        from { opacity: 0; transform: translateY(8px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-    /* ── Hero animation ──────────────────────────────────────────── */
-    @keyframes slideInLeft {
-        from { opacity: 0; transform: translateX(-60px); }
-        to   { opacity: 1; transform: translateX(0); }
-    }
-    .slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) both; }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-350 { animation-delay: 0.35s; }
-    .delay-500 { animation-delay: 0.5s; }
     /* ── Typography & icons ──────────────────────────────────────── */
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     body { font-family: 'Roboto', sans-serif; }
@@ -87,14 +66,20 @@ if (!window.spaRouterLoaded) {
                 if (currentNav && newNav) {
                     currentNav.innerHTML = newNav.innerHTML;
                 }
-                
+
+                const currentFooter = document.querySelector('footer');
+                const newFooter = doc.querySelector('footer');
+                if (currentFooter && newFooter) {
+                    currentFooter.replaceWith(newFooter);
+                }
+
                 document.title = doc.title;
-                
+
                 // Inject/replace out-of-main body elements from fetched doc (modals, overlays, etc.)
                 // These are outside <main> so replaceWith(newMain) doesn't move them automatically
                 Array.from(doc.body.children).forEach(el => {
                     const tag = el.tagName.toLowerCase();
-                    if (tag === 'script' || tag === 'main' || tag === 'nav' || tag === 'noscript') return;
+                    if (tag === 'script' || tag === 'main' || tag === 'nav' || tag === 'footer' || tag === 'noscript') return;
                     const existingEl = el.id ? document.getElementById(el.id) : null;
                     if (existingEl) {
                         existingEl.replaceWith(el);
@@ -117,6 +102,11 @@ if (!window.spaRouterLoaded) {
                     document.querySelectorAll('[class*="animate-"]').forEach(el => {
                         const cls = [...el.classList].find(c => c.startsWith('animate-'));
                         if (cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+                    });
+                    document.querySelectorAll('.slide-in-left').forEach(el => {
+                        el.style.animation = 'none';
+                        void el.offsetHeight;
+                        el.style.animation = '';
                     });
                 }, 50);
                 // Re-initialize tab UI after SPA swap (ensures brand tabs work without reload)
@@ -142,7 +132,11 @@ if (!window.spaRouterLoaded) {
             };
 
             window.history.pushState({}, '', url);
-            performSwap();
+            if (document.startViewTransition) {
+                document.startViewTransition(() => performSwap());
+            } else {
+                performSwap();
+            }
             
         } catch (e) {
             window.location.href = url; 
