@@ -988,6 +988,9 @@ nav { view-transition-name: site-nav; }
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  .mobile-logo-sm {
+    max-width: 72px;
+  }
 }
 
 /* ── Respect reduced-motion preference ─────────────────────────── */
