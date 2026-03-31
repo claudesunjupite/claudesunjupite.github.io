@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html class="light" lang="en"><head>
+  <title>Downloads | Brochures & Catalogues — Sun Jupiter Co., Ltd.</title>
   <link rel="icon" type="image/png" href="assets/favicon.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -154,6 +155,23 @@ if (!window.spaRouterLoaded) {
                     newScript.textContent = script.textContent;
                     document.body.appendChild(newScript);
                 });
+
+                // Force Tailwind CDN to re-scan new DOM classes (fixes animations + group-hover)
+                if (window.tailwind && typeof window.tailwind.refresh === 'function') {
+                    window.tailwind.refresh();
+                }
+
+                // Re-trigger CSS animations so they play fresh on SPA navigation
+                setTimeout(() => {
+                    document.querySelectorAll('[class*="animate-"]').forEach(el => {
+                        const cls = [...el.classList].find(c => c.startsWith('animate-'));
+                        if (cls) {
+                            el.classList.remove(cls);
+                            void el.offsetWidth;
+                            el.classList.add(cls);
+                        }
+                    });
+                }, 50);
                 
                 if (url.includes('#')) {
                     const hash = url.split('#')[1];
@@ -203,6 +221,9 @@ if (!window.spaRouterLoaded) {
 }
 </script>
 <script src="assets/lang.js"></script>
+  <meta name="description" content="Download product brochures, technical catalogues, and spec sheets for construction hoists, tower cranes, and concrete machinery from Sun Jupiter."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://claudesunjupite.github.io/downloads.html"/>
 </head>
 <body class="bg-surface text-on-surface antialiased">
 <!-- STANDARDIZED NAVBAR -->
