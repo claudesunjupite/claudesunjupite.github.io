@@ -740,6 +740,7 @@ img, video { max-width: 100%; height: auto; }
   .md\:col-span-2 { grid-column: span 2 / span 2; }
   .md\:col-span-4 { grid-column: span 4 / span 4; }
   .md\:col-span-5 { grid-column: span 5 / span 5; }
+  .md\:col-span-6 { grid-column: span 6 / span 6; }
   .md\:col-span-7 { grid-column: span 7 / span 7; }
   .md\:col-span-8 { grid-column: span 8 / span 8; }
   .md\:flex { display: flex; }
@@ -778,6 +779,7 @@ img, video { max-width: 100%; height: auto; }
   .md\:right-8 { right: 2rem; }
   .md\:row-span-2 { grid-row: span 2 / span 2; }
   .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .md\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
   .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
   .md\:text-5xl { font-size: 3rem; line-height: 1; }
   .md\:text-6xl { font-size: 3.75rem; line-height: 1; }
